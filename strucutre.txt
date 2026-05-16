@@ -35,3 +35,34 @@ server/
 │   └── matchingAlgorithm.js ← the smart matching logic
 │
 └── index.js                ← needs Socket.IO added
+
+
+
+
+
+
+// frontend
+src/
+├── api/
+│   └── axios.js          ← axios instance with base URL + token
+├── components/
+│   ├── ui/               ← Button, Input, Avatar etc
+│   └── layout/           ← Navbar, ProtectedRoute
+├── features/
+│   ├── auth/             ← Login, Register components
+│   ├── profile/          ← Study profile setup
+│   ├── match/            ← Match request + group display
+│   └── chat/             ← Group chat UI
+├── hooks/
+│   ├── useAuth.js        ← auth operations
+│   └── useSocket.js      ← socket connection
+├── pages/
+│   ├── LoginPage.jsx
+│   ├── RegisterPage.jsx
+│   ├── DashboardPage.jsx
+│   ├── ProfilePage.jsx
+│   └── ChatPage.jsx
+├── store/
+│   └── authStore.js      ← zustand store for user state
+├── App.jsx
+└── main.jsx
