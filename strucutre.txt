@@ -1,0 +1,37 @@
+server/
+├── config/
+│   ├── db.js               ✅ done
+│   └── cloudinary.js       ✅ done
+│
+├── controllers/
+│   ├── authController.js   ✅ done
+│   ├── userController.js   ← profile, subjects, interests
+│   ├── matchController.js  ← matching algorithm
+│   └── groupController.js  ← group management
+│
+├── middlewares/
+│   ├── authMiddleware.js   ✅ done
+│   └── multerMiddleware.js ✅ done
+│
+├── models/
+│   ├── User.js             ✅ done (needs fields added)
+│   ├── Group.js            ← study groups
+│   └── Message.js          ← chat messages
+│
+├── routes/
+│   ├── authRoutes.js       ✅ done
+│   ├── userRoutes.js       ← profile update, subjects
+│   ├── matchRoutes.js      ← trigger matching
+│   └── groupRoutes.js      ← group CRUD
+│
+├── sockets/
+│   └── chatSocket.js       ← all Socket.IO logic lives here
+│
+├── utils/
+│   ├── ApiError.js         ✅ done
+│   ├── ApiResponse.js      ✅ done
+│   ├── asyncHandler.js     ✅ done
+│   ├── cloudinary.js       ✅ done
+│   └── matchingAlgorithm.js ← the smart matching logic
+│
+└── index.js                ← needs Socket.IO added
