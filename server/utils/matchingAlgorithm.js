@@ -6,6 +6,7 @@
 const scoreUsers = (currentUser, otherUser) => {
   let score = 0;
 
+  
   const sharedSubjects = currentUser.subjects.filter((s) =>
     otherUser.subjects.includes(s)
   );
