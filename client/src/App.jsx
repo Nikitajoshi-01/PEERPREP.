@@ -1,17 +1,26 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import ProtectedRoute from './components/layout/ProtectedRoute.jsx';
-import LoginPage from './pages/LoginPage.jsx';
-import RegisterPage from './pages/RegisterPage.jsx';
-import DashboardPage from './pages/DashboardPage.jsx';
-import ProfilePage from './pages/ProfilePage.jsx';
-import ChatPage from './pages/ChatPage.jsx';
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/layout/ProtectedRoute.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import ChatPage from "./pages/ChatPage.jsx";
+import useAuth from "./hooks/useAuth.js";
+import useAuthStore from "./store/authStore.js";
 
-const App = () => {
+// ← separate component INSIDE BrowserRouter
+const AppRoutes = () => {
+  const { getCurrentUser } = useAuth();
+  const { token } = useAuthStore();
+
+  useEffect(() => {
+    if (token) getCurrentUser();
+  }, []);
+
   return (
-    <BrowserRouter>
-    <div><h1>hi nikita here
-      </h1></div>
+    <>
       <Toaster position="top-right" />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
@@ -27,6 +36,15 @@ const App = () => {
         } />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
+    </>
+  );
+};
+
+// ← App just wraps everything in BrowserRouter
+const App = () => {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 };

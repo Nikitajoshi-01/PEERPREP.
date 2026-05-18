@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
-  withCredentials: true,  // sends cookies automatically
+  baseURL: '/api',  // ← just /api, not full URL
+  withCredentials: true,
 });
 
-// Request interceptor — attaches token to every request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('accessToken');
   if (token) {
@@ -14,7 +13,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor — handles token expiry globally
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
