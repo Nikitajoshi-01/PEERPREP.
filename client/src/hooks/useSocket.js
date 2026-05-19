@@ -13,29 +13,36 @@ const useSocket = () => {
       withCredentials: true,
     });
 
+    socket.current.on('connect', () => {
+      console.log('Socket connected:', socket.current.id);
+    });
+
     return () => {
       socket.current?.disconnect();
     };
   }, [user]);
 
   const joinGroup = (groupId) => {
-    socket.current?.emit('joinGroup', {
-      groupId,
-      userId: user?._id,
-    });
+    socket.current?.emit('joinGroup', { groupId, userId: user?._id });
   };
 
   const sendMessage = (groupId, content) => {
-    socket.current?.emit('sendMessage', {
-      groupId,
-      senderId: user?._id,
-      content,
-    });
+    socket.current?.emit('sendMessage', { groupId, senderId: user?._id, content });
   };
 
   const onMessage = (callback) => {
     socket.current?.on('newMessage', callback);
     return () => socket.current?.off('newMessage', callback);
+  };
+
+  const onTyping = (callback) => {
+    socket.current?.on('userTyping', callback);
+    return () => socket.current?.off('userTyping', callback);
+  };
+
+  const onStopTyping = (callback) => {
+    socket.current?.on('userStoppedTyping', callback);
+    return () => socket.current?.off('userStoppedTyping', callback);
   };
 
   const emitTyping = (groupId) => {
@@ -46,7 +53,7 @@ const useSocket = () => {
     socket.current?.emit('stopTyping', { groupId });
   };
 
-  return { joinGroup, sendMessage, onMessage, emitTyping, emitStopTyping };
+  return { joinGroup, sendMessage, onMessage, onTyping, onStopTyping, emitTyping, emitStopTyping };
 };
 
 export default useSocket;

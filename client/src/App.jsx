@@ -31,7 +31,7 @@ const AppRoutes = () => {
         <Route path="/profile" element={
           <ProtectedRoute><ProfilePage /></ProtectedRoute>
         } />
-        <Route path="/chat" element={
+        <Route path="/chat/:groupId" element={
           <ProtectedRoute><ChatPage /></ProtectedRoute>
         } />
         <Route path="*" element={<Navigate to="/login" replace />} />

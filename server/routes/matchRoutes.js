@@ -1,11 +1,23 @@
 import { Router } from "express";
-import { requestMatch, getMyGroup, leaveGroup } from "../controllers/matchController.js";
+import {
+  getSuggestedMatches,
+  createGroup,
+  joinGroup,
+  leaveGroup,
+  getMyGroups,
+  updateGroup,
+  searchGroups,
+} from "../controllers/matchController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.route("/request").post(protect, requestMatch);
-router.route("/my-group").get(protect, getMyGroup);
-router.route("/leave").post(protect, leaveGroup);
+router.route("/suggestions").get(protect, getSuggestedMatches);
+router.route("/groups").get(protect, getMyGroups);
+router.route("/groups/search").get(protect, searchGroups);
+router.route("/groups/create").post(protect, createGroup);
+router.route("/groups/:groupId/join").post(protect, joinGroup);
+router.route("/groups/:groupId/leave").post(protect, leaveGroup);
+router.route("/groups/:groupId/update").patch(protect, updateGroup);
 
 export default router;

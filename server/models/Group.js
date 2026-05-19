@@ -5,26 +5,23 @@ const groupSchema = new Schema(
     name: {
       type: String,
       required: true,
+      unique: true,       // ← unique group names
       trim: true,
     },
-    members: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    subjects: {
-      type: [String],  // common subjects across the group
-      default: [],
+    description: {
+      type: String,
+      default: "",
+      trim: true,
     },
-    interests: {
-      type: [String],  // common interests across the group
-      default: [],
+    admin: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,    // ← group creator is admin
     },
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
+    members: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    subjects: { type: [String], default: [] },
+    interests: { type: [String], default: [] },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
