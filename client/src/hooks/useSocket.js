@@ -15,9 +15,12 @@ const useSocket = () => {
 
     socket.current.on('connect', () => {
       console.log('Socket connected:', socket.current.id);
+      // tell server this user is online
+      socket.current.emit('userOnline', { userId: user._id });
     });
 
     return () => {
+      socket.current?.emit('userOffline', { userId: user._id });
       socket.current?.disconnect();
     };
   }, [user]);
@@ -45,6 +48,11 @@ const useSocket = () => {
     return () => socket.current?.off('userStoppedTyping', callback);
   };
 
+  const onOnlineUsers = (callback) => {
+    socket.current?.on('onlineUsers', callback);
+    return () => socket.current?.off('onlineUsers', callback);
+  };
+
   const emitTyping = (groupId) => {
     socket.current?.emit('typing', { groupId, username: user?.username });
   };
@@ -53,7 +61,16 @@ const useSocket = () => {
     socket.current?.emit('stopTyping', { groupId });
   };
 
-  return { joinGroup, sendMessage, onMessage, onTyping, onStopTyping, emitTyping, emitStopTyping };
+  return {
+    joinGroup,
+    sendMessage,
+    onMessage,
+    onTyping,
+    onStopTyping,
+    onOnlineUsers,
+    emitTyping,
+    emitStopTyping,
+  };
 };
 
 export default useSocket;
