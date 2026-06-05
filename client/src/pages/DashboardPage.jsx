@@ -272,13 +272,57 @@ const DashboardPage = () => {
                 : "Set up your profile to get matched"}
             </p>
           </div>
-          <button
+          {/* <button
             onClick={() => setShowCreate(true)}
             disabled={myGroups.length >= 5}
             className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white text-sm px-4 py-2 rounded-lg transition-colors flex-shrink-0"
           >
             + Create Group
-          </button>
+          </button> */}
+
+
+
+
+
+
+
+
+
+
+          
+                    <div className="flex gap-2 flex-shrink-0">
+            <button
+              onClick={() => navigate("/recommendations")}
+              className="bg-purple-700 hover:bg-purple-600 text-white text-sm px-4 py-2 rounded-lg transition-colors"
+            >
+              ✦ AI Picks
+            </button>
+            <button
+              onClick={() => setShowCreate(true)}
+              disabled={myGroups.length >= 5}
+              className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white text-sm px-4 py-2 rounded-lg transition-colors"
+            >
+              + Create Group
+            </button>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
         {/* Profile incomplete warning */}

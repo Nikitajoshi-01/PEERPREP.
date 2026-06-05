@@ -9,6 +9,10 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import useAuth from "./hooks/useAuth.js";
 import useAuthStore from "./store/authStore.js";
+// add this import
+import RecommendationsPage from "./pages/RecommendationsPage.jsx";
+
+
 
 // ← separate component INSIDE BrowserRouter
 const AppRoutes = () => {
@@ -23,6 +27,7 @@ const AppRoutes = () => {
     <>
       <Toaster position="top-right" />
       <Routes>
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={
@@ -34,6 +39,11 @@ const AppRoutes = () => {
         <Route path="/chat/:groupId" element={
           <ProtectedRoute><ChatPage /></ProtectedRoute>
         } />
+        {/* NEW route for AI recommendations */}
+       
+<Route path="/recommendations" element={
+  <ProtectedRoute><RecommendationsPage /></ProtectedRoute>
+} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </>
