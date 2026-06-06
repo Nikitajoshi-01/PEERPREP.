@@ -266,11 +266,22 @@ const DashboardPage = () => {
         <div className="flex items-start justify-between">
           <div>
             <h2 className="text-2xl font-bold">Hey, {user?.fullName || "there"} 👋</h2>
-            <p className="text-gray-400 mt-1 text-sm">
+            {/* <p className="text-gray-400 mt-1 text-sm">
               {user?.subjects?.length
                 ? `Studying: ${user.subjects.join(", ")}`
                 : "Set up your profile to get matched"}
-            </p>
+            </p> */}
+
+
+
+          <p className="text-gray-400 mt-1 text-sm">
+            {user?.subjects?.length || user?.interests?.length
+              ? `Studying: ${user.subjects?.join(", ") || user.interests?.join(", ")}`
+              : "Set up your profile to get matched"}
+          </p>
+
+
+
           </div>
           {/* <button
             onClick={() => setShowCreate(true)}
@@ -326,7 +337,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Profile incomplete warning */}
-        {!user?.subjects?.length && (
+        {/* {!user?.subjects?.length && (
           <div className="bg-yellow-900/30 border border-yellow-700 rounded-xl p-4 flex items-center justify-between">
             <p className="text-yellow-400 text-sm">Complete your study profile to get matched</p>
             <button onClick={() => navigate("/profile")}
@@ -334,7 +345,28 @@ const DashboardPage = () => {
               Setup Profile
             </button>
           </div>
-        )}
+        )} */}
+
+
+
+
+
+
+
+
+
+
+
+        {/* Profile incomplete warning — only show if subjects AND interests are both empty */}
+{!user?.subjects?.length && !user?.interests?.length && (
+  <div className="bg-yellow-900/30 border border-yellow-700 rounded-xl p-4 flex items-center justify-between">
+    <p className="text-yellow-400 text-sm">Complete your study profile to get matched</p>
+    <button onClick={() => navigate("/profile")}
+      className="bg-yellow-600 hover:bg-yellow-700 text-white text-sm px-4 py-2 rounded-lg">
+      Setup Profile
+    </button>
+  </div>
+)}
 
         {/* Group limit warning */}
         {myGroups.length >= 5 && (

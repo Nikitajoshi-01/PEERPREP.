@@ -43,9 +43,9 @@
 
 
 
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+// import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+const client = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
 
 export const WEIGHTS = {
   keyword:      0.35,

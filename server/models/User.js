@@ -104,7 +104,7 @@ userSchema.pre("save", function (next) {
       ...this.studyGoals,
     ].map((t) => t.toLowerCase().trim()))];
   }
-  next();
+  // next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
