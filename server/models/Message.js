@@ -17,6 +17,7 @@ const messageSchema = new Schema(
       required: true,
       trim: true,
     },
+    isAI:    { type: Boolean, default: false },  // ← NEW
   },
   { timestamps: true }
 );

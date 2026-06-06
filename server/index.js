@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
+
+
 console.log("ENV CHECK:", {
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
@@ -22,7 +24,8 @@ import userRoutes from "./routes/userRoutes.js";
 import matchRoutes from "./routes/matchRoutes.js";
 import groupRoutes from "./routes/groupRoutes.js";
 
-
+// add this import at the top with other route imports
+import aiRoutes from "./routes/aiRoutes.js";
 
 const app = express();
 const httpServer = createServer(app);  // wrap express in http server for socket.io
@@ -51,7 +54,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/match", matchRoutes);
 app.use("/api/groups", groupRoutes);
-
+app.use("/api/ai", aiRoutes);
 // Health check
 app.get("/", (req, res) => {
   res.json({ message: "PeerPrep API is running" });
