@@ -1,11 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
-
-
-console.log("ENV CHECK:", {
-  ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
-  REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
-});
+// console.log("ENV CHECK:", {
+//   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
+//   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
+// });
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
